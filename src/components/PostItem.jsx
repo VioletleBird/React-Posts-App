@@ -1,16 +1,20 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Modal from './Modal.jsx';
 import CommentItem from './CommentItem.jsx';
 
 export default function PostItemContainer({ post }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate();
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
+        navigate(`/posts/${post.id}`)
     };
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
+        navigate('/posts')
     };
 
     return (
