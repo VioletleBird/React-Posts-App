@@ -1,15 +1,19 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export default function SearchForm() {
-  const [searchTerm, setSearchTerm] = useState('');
+export default function SearchForm({ onSearch }) {
+    const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onSearch(searchTerm);
+        navigate(`/?search=${searchTerm}`);
+    };
 
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+    const handleChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
 
   return (
     <form className="d-flex" onSubmit={handleSubmit}>

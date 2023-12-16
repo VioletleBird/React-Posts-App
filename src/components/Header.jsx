@@ -1,18 +1,21 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SearchForm from './SearchForm.jsx';
 
-export default function Header({ onSortChange }) {
+export default function Header({ onSortChange, onSearch }) {
     const [selectedSort, setSelectedSort] = useState(null);
+    const navigate = useNavigate();
 
     const handleSortChange = (sortOption) => {
         setSelectedSort(sortOption);
         onSortChange(sortOption);
-    }
+        navigate(`/?sort=${sortOption}`);
+    };
 
     return (
         <nav className="navbar navbar-expand-sm text-d-grey bg-white p-3">
             <div className="container">
-                <h2>PostsBoard</h2>
+                <a href="/posts"><h2>PostsBoard</h2></a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -20,7 +23,7 @@ export default function Header({ onSortChange }) {
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav ms-auto">
                         <li>
-                            <SearchForm />
+                            <SearchForm onSearch={onSearch}/>
                         </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
