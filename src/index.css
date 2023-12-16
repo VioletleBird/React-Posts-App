@@ -5,7 +5,7 @@
   --clr-bright-hover: #a50331;
   --clr-lg-grey: #f1f3f8;
   --clr-md-grey: #e0e4f0;
-  --transition: 0.6s;
+  --transition: all 0.3s ease-in-out;
 }
 
 *, ::after, ::before {
@@ -14,25 +14,31 @@
   box-sizing: border-box;
 }
 
+body {
+  color: var(--clr-d-grey);
+}
+
 .wrapper {
   max-width: 992px;
   width: 90%;
   margin: auto;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .bg-lg-grey {
   background-color: var(--clr-lg-grey);
-  color: var(--clr-d-grey);
 }
 
 .bg-md-grey {
   background-color: var(--clr-md-grey);
-  color: var(--clr-d-grey);
 }
 
 .btn-md-grey {
   background-color: var(--clr-md-grey);
-  color: var(--clr-d-grey);
 }
 
 .btn-md-grey:hover {
@@ -52,33 +58,28 @@
   transition: var(--transition);
 }
 
-.btn-like {
+.btn-like-active {
   fill: var(--clr-bright);
 }
 
-.btn-like:hover {
-  transform: scale(1.2);
-  transition: var(--transition);
+.btn-like {
+  fill: var(--clr-d-grey);
 }
 
 .pen-icon {
   fill: var(--clr-white);
 };
 
-.dropdown-menu, .dropdown-menu:hover {
-  color: var(--clr-d-grey);
-}
-
-.dropdown-item {
-  color: var(--clr-d-grey);
-}
-
 .dropdown-item:hover {
-  background-color: var(--clr-lg-grey);
+  background-color: var(--clr-md-grey);
 }
 
 .modal {
   padding-top: 5%;
   background-color: #4141415b;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.form-group {
+  margin-top: 10px;
 }
