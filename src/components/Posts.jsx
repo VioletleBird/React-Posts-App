@@ -19,9 +19,9 @@ export default function Posts() {
     }, []);
     
     return (
-        <ul class="list-unstyled">
+        <ul className="list-unstyled">
             {loadedPosts.map((post) => (
-                 <PostItem key={post.id} post={post} />
+                <PostItem key={post.id} post={post} />
             ))} 
         </ul>
     );

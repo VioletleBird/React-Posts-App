@@ -38,6 +38,11 @@ app.get('/posts', async (req, res) => {
 
         const postsData = posts.map((post) => {
             const user = users.find((user) => user.id === post.userId);
+
+            const postComments = comments
+                .filter((comment) => comment.postId === post.id)
+                .map(({ id, name, email, body }) => ({ id, name, email, body }));
+
             return {
                 id: post.id,
                 title: post.title,
@@ -45,7 +50,8 @@ app.get('/posts', async (req, res) => {
                 user: user
                     ? { id: user.id, name: user.name }
                     : { id: null, name: 'Unknown User' },
-                numComments: comments.filter((comment) => comment.postId === post.id).length,
+                numComments: postComments.length,
+                comments: postComments,
             };
         });
 
