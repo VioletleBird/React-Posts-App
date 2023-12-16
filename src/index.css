@@ -68,7 +68,7 @@ a {
 
 .pen-icon {
   fill: var(--clr-white);
-};
+}
 
 .dropdown-item:hover {
   background-color: var(--clr-md-grey);
