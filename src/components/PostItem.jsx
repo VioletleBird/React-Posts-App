@@ -9,19 +9,19 @@ export default function PostItemContainer({ post }) {
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
-        navigate(`/posts/${post.id}`)
+        navigate(`${post.id}`)
     };
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
-        navigate('/posts')
+        navigate('/')
     };
 
     return (
         <>
             <PostItem post={post} onOpenModal={handleOpenModal} />
             <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-            <article className="bg-white rounded px-3">
+                <article className="bg-white rounded px-3">
                     <div className=" pt-4 text-d-grey">
                         <h5 className="pb-2">{post.title}</h5>
                         <p className="small">written by <b>{post.user.name}</b></p>
@@ -47,11 +47,11 @@ function PostItem({ post, onOpenModal }) {
     };
 
     return (
-        <li className="container my-5">
+        <li className="wrapper my-5">
             <article className="bg-light rounded shadow-sm">
                 <div className="p-3 text-d-grey" onClick={onOpenModal}>
                     <h5 className="pb-2">{post.title}</h5>
-                    <p className="pb-4">{post.body}</p>
+                    <p>{post.body.slice(0, 70)} ...</p>
                 </div>
                 <div className="d-flex flex-wrap p-2 bg-lg-grey">
                     <p className="p-2 small me-auto my-auto text-d-grey">{post.user.name}</p>

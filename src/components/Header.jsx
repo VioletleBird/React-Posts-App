@@ -24,8 +24,8 @@ export default function Header({ onSortChange, onSearch }) {
 
     return (
         <nav className="navbar navbar-expand-sm text-d-grey bg-white p-3">
-            <div className="container">
-                <a href="/posts"><h2>PostsBoard</h2></a>
+            <div className="container wrapper">
+                <a href="/"><h2>PostsBoard</h2></a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

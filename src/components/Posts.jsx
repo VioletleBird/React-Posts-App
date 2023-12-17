@@ -1,24 +1,26 @@
 import { useState, useEffect } from 'react';
 import PostItem from './PostItem.jsx';
+import { useLocation } from 'react-router-dom';
 
-export default function Posts({ sortOption, searchTerm }) {
+export default function Posts({ sortOption: initialSortOption, searchTerm: initialSearchTerm }) {
     const [loadedPosts, setLoadedPosts] = useState([]);
+    const location = useLocation();
 
     useEffect(() => {
         async function fetchPosts() {
             try {
-                const postsResponse = await fetch('https://jsonplaceholder.typicode.com/posts');
-                const usersResponse = await fetch('https://jsonplaceholder.typicode.com/users');
-                const commentsResponse = await fetch('https://jsonplaceholder.typicode.com/comments');
+                const postsRes = await fetch('https://jsonplaceholder.typicode.com/posts');
+                const usersRes = await fetch('https://jsonplaceholder.typicode.com/users');
+                const commentsRes = await fetch('https://jsonplaceholder.typicode.com/comments');
 
-                if (!postsResponse.ok || !usersResponse.ok || !commentsResponse.ok) {
-                    throw new Error('Error fetching data');
+                if (!postsRes.ok || !usersRes.ok || !commentsRes.ok) {
+                throw new Error('Error fetching data');
                 }
 
                 const [posts, users, comments] = await Promise.all([
-                    postsResponse.json(),
-                    usersResponse.json(),
-                    commentsResponse.json(),
+                postsRes.json(),
+                usersRes.json(),
+                commentsRes.json(),
                 ]);
 
                 let postsData = posts.map((post) => {
@@ -32,8 +34,8 @@ export default function Posts({ sortOption, searchTerm }) {
                         id: post.id,
                         title: post.title,
                         body: post.body,
-                        user: user
-                            ? { id: user.id, name: user.name }
+                        user: user 
+                            ? { id: user.id, name: user.name } 
                             : { id: null, name: 'Unknown User' },
                         numComments: postComments.length,
                         comments: postComments,
@@ -41,6 +43,14 @@ export default function Posts({ sortOption, searchTerm }) {
                 });
 
                 // Sorting
+                let sortOption = initialSortOption;
+
+                const urlSearchParams = new URLSearchParams(location.search);
+                const urlSortOption = urlSearchParams.get('sort');
+                if (urlSortOption) {
+                    sortOption = urlSortOption;
+                }
+
                 if (sortOption === 'asc') {
                     postsData.sort((a, b) => a.title.localeCompare(b.title));
                 } else if (sortOption === 'desc') {
@@ -48,14 +58,21 @@ export default function Posts({ sortOption, searchTerm }) {
                 }
 
                 // Searching
+                let searchTerm = initialSearchTerm;
+
+                const urlSearchTerm = urlSearchParams.get('search');
+                if (urlSearchTerm) {
+                    searchTerm = urlSearchTerm;
+                };
+
                 if (searchTerm) {
                     const lowerCaseSearchTerm = searchTerm.toLowerCase();
                     postsData = postsData.filter(
                         (post) =>
-                            post.title.toLowerCase().includes(lowerCaseSearchTerm) ||
-                            post.body.toLowerCase().includes(lowerCaseSearchTerm)
+                        post.title.toLowerCase().includes(lowerCaseSearchTerm) ||
+                        post.body.toLowerCase().includes(lowerCaseSearchTerm)
                     );
-                }
+                };
 
                 setLoadedPosts(postsData);
             } catch (err) {
@@ -64,7 +81,7 @@ export default function Posts({ sortOption, searchTerm }) {
         }
 
         fetchPosts();
-    }, [sortOption, searchTerm]);
+    }, [initialSortOption, initialSearchTerm, location.search]);
 
     return (
         <ul className="list-unstyled">
@@ -73,4 +90,4 @@ export default function Posts({ sortOption, searchTerm }) {
             ))}
         </ul>
     );
-}
+};
