@@ -1,15 +1,20 @@
 # REACT-POSTS-APP
 
-Welcome to PostsBoard, a simple React application for managing and displaying posts.
+PostsBoard is a single page web application built with React that allows users to view, search, and interact with posts.
 
-## Overview
+https://violetlebird.github.io/React-Posts-App/
 
-PostsBoard is a web application built with React that allows users to view, search, and interact with posts. It provides a clean and user-friendly interface for managing posts.
+![alt text](screenshot.jpg "main page")
 
 ## Features
 
-- View a list of posts with details such as title and body.
-- Sort posts alphabetically (A-Z and Z-A).
-- Search for posts by entering keywords.
-- Open a modal to view a detailed post, including comments.
-- Like and interact with posts.
+- View a list of posts with details such as title and body
+- Sort posts alphabetically (A-Z and Z-A)
+- Search for posts by entering keywords
+- Open a modal to view a detailed post, including comments
+- Like posts
+
+## Deploying
+
+For deploying this application is used Vite.
+You can use any other deployment software that supports React.

@@ -13,21 +13,21 @@ export default function SinglePost() {
 
     useEffect(() => {
         async function fetchPostDetails() {
-        try {
-            const postRes = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
-            const postData = await postRes.json();
-            setPost(postData);
+            try {
+                const postRes = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
+                const postData = await postRes.json();
+                setPost(postData);
 
-            const commentsRes = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`);
-            const commentsData = await commentsRes.json();
-            setComments(commentsData);
+                const commentsRes = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`);
+                const commentsData = await commentsRes.json();
+                setComments(commentsData);
 
-            const userRes = await fetch(`https://jsonplaceholder.typicode.com/users/${postData.userId}`);
-            const userData = await userRes.json();
-            setUser(userData);
-        } catch (err) {
-            console.error('Error fetching post details: ', err.message);
-        }
+                const userRes = await fetch(`https://jsonplaceholder.typicode.com/users/${postData.userId}`);
+                const userData = await userRes.json();
+                setUser(userData);
+            } catch (err) {
+                console.error('Error fetching post details: ', err.message);
+            }
         }
 
         fetchPostDetails();

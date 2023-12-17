@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import PostItem from './PostItem.jsx';
 import { useLocation } from 'react-router-dom';
+import PostItem from './PostItem.jsx';
 
 export default function Posts({ sortOption: initialSortOption, searchTerm: initialSearchTerm }) {
     const [loadedPosts, setLoadedPosts] = useState([]);
@@ -14,13 +14,13 @@ export default function Posts({ sortOption: initialSortOption, searchTerm: initi
                 const commentsRes = await fetch('https://jsonplaceholder.typicode.com/comments');
 
                 if (!postsRes.ok || !usersRes.ok || !commentsRes.ok) {
-                throw new Error('Error fetching data');
+                    throw new Error('Error fetching data');
                 }
 
                 const [posts, users, comments] = await Promise.all([
-                postsRes.json(),
-                usersRes.json(),
-                commentsRes.json(),
+                    postsRes.json(),
+                    usersRes.json(),
+                    commentsRes.json(),
                 ]);
 
                 let postsData = posts.map((post) => {
